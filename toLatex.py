@@ -47,7 +47,12 @@ if "-f" in sys.argv:
     outFile.write("\\documentclass{article}\n")
     outFile.write("\\usepackage[breakable]{tcolorbox}" + "\n")
     outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
-    outFile.write("\\begin{document}\n")
+    outFile.write("\\setlength{\\topmargin}{-.3 in}" + "\n")
+    outFile.write("\\setlength{\\oddsidemargin}{-.25 in}" + "\n")
+    outFile.write("\\setlength{\\evensidemargin}{0.25 in}" + "\n")
+    outFile.write("\\setlength{\\textheight}{9. in}" + "\n")
+    outFile.write("\\setlength{\\textwidth}{7 in}" + "\n")
+    outFile.write("\\begin{document}\n" + "\n")
 
 if "-p" in sys.argv and "-f" not in sys.argv:
     outFile.write("-------Copy and Paste above \\begin{document}------------\n")
