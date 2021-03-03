@@ -41,10 +41,17 @@ if len(sys.argv) == 3:
         outFile = open(sys.argv[2], "w")
     else:
         outFile = open("formattedLatex.txt", "w")
+        
+    if sys.argv[2] == "-f":
+        outFile.write("\\documentclass{article}\n")
 
-    if sys.argv[2] == "-p":
+    if sys.argv[2] == "-p" or "-f":
         outFile.write("\\usepackage[breakable]{tcolorbox}" + "\n")
         outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
+    if sys.argv[2] == "-f":
+        outFile.write("\\begin{document}\n")
+
+
 else:
    outFile = open("formattedLatex.txt", "w")
 
@@ -78,6 +85,12 @@ for line in inFile:
 outFile.write("\\code{-}\\\\" + "\n")
 
 outFile.write("\\end{tcolorbox}" + "\n")
+
+if len(sys.argv) == 3:
+    if sys.argv[2] == "-f":
+        outFile.write("\\end{document}")
+
+
 
 inFile.close()
 outFile.close()
