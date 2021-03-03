@@ -6,7 +6,7 @@ The purpose of this .py file is to output well formatted LATEX code from some te
 
 ### Use on the command line
 ### Input:
-### \ \ \ \ \ \ $ python toLatex.py [nameOfFileToConvert].[extension]
+###       $ python toLatex.py [nameOfFileToConvert].[extension]
 ### \ \ \ \ \ \ $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt
 ### \ \ \ \ \ \ $ python toLatex.py [nameOfFileToConvert].[extension] -p
 ### \ \ \ \ \ \ $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt -p
