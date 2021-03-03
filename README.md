@@ -1,11 +1,12 @@
 # LATEXConversion
-##Converts text based files (.txt, .py, .jl, etc.) into code-like formatted LATEX; Useful for transcribing code into LATEX
 
+## Description:
+
+Converts text based files (.txt, .py, .jl, etc.) into code-like formatted LATEX; Useful for transcribing code into LATEX
 The purpose of this .py file is to output well formatted LATEX code from some text based file.
 
 
 ## Use on the command line:
-Input:
 
     $ python toLatex.py [nameOfFileToConvert].[extension]
     $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt
