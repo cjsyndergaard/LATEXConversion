@@ -53,7 +53,7 @@ if len(sys.argv) == 4:
         outFile.write("\\usepackage[breakable]{tcolorbox}" + "\n")
         outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
 
-outFile.write("\\begin{tcolorbox}[width=\\linewidth]" + "\n")
+outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
 
 for line in inFile:
     writeLine = line.replace("{", "\\{").replace("}", "\\}").replace("\\", "{\\textbackslash}").replace(" ", "\\ ")
