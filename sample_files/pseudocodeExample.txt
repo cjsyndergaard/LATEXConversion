@@ -7,4 +7,3 @@ while low <= high:
         low = mid + 1
     else: #A[mid] > x:
         high = mid - 1
-          
