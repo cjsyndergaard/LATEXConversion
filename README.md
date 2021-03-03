@@ -4,12 +4,12 @@
 The purpose of this .py file is to output well formatted LATEX code from some text based file.
 
 
-### Use on the command line
-### Input:
-###       $ python toLatex.py [nameOfFileToConvert].[extension]
-### \ \ \ \ \ \ $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt
-### \ \ \ \ \ \ $ python toLatex.py [nameOfFileToConvert].[extension] -p
-### \ \ \ \ \ \ $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt -p
+  ### Use on the command line
+  ### Input:
+    $ python toLatex.py [nameOfFileToConvert].[extension]
+    $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt
+    $ python toLatex.py [nameOfFileToConvert].[extension] -p
+    $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt -p
 
 Without customOutputFile name, or if you try and output it to a file without the .txt extension,
 the program will output the code to a file named "formattedLatex.txt"
