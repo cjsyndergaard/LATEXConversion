@@ -16,11 +16,12 @@ import sys
 # end in .txt
 
 if len(sys.argv) == 1:
-    print("Input:$ python toLatex.py [nameOfFileToConvert].[extension]")
-    print("      $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt")
-    print("      $ python toLatex.py [nameOfFileToConvert].[extension] -p")
-    print("      $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt -p")
-    print()
+    print("Input:")
+    print("$ python toLatex.py [nameOfFileToConvert].[extension]")
+    print("$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt")
+    print("$ python toLatex.py [nameOfFileToConvert].[extension] [-p or -f [-f or -p]]")
+    print("$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt [-p or -f [-f or -p]]\n")
+
     print("It will convert any (raw text based) file extension to a .txt (at least, I think so,")
     print("I tried it with .jl, .py, and of course, .txt), which you can just open up and copy")
     print("and paste into whatever .tex document you're working on. the -p command means you")
@@ -30,35 +31,30 @@ if len(sys.argv) == 1:
     print("great for simple pseudocode and everything I've been able to find. The outfile needs")
     print("to end in .txt.")
 
-
     sys.exit(0)
-
 
 inFile = open(sys.argv[1], "r")
 
-if len(sys.argv) == 3:
+if len(sys.argv) > 2:
     if sys.argv[2].endswith(".txt"):
         outFile = open(sys.argv[2], "w")
     else:
         outFile = open("formattedLatex.txt", "w")
-        
-    if sys.argv[2] == "-f":
-        outFile.write("\\documentclass{article}\n")
-
-    if sys.argv[2] == "-p" or "-f":
-        outFile.write("\\usepackage[breakable]{tcolorbox}" + "\n")
-        outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
-    if sys.argv[2] == "-f":
-        outFile.write("\\begin{document}\n")
-
-
 else:
-   outFile = open("formattedLatex.txt", "w")
+    outFile = open("formattedLatex.txt", "w")
 
-if len(sys.argv) == 4:
-    if sys.argv[3] == "-p":
-        outFile.write("\\usepackage[breakable]{tcolorbox}" + "\n")
-        outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
+if "-f" in sys.argv:
+    outFile.write("\\documentclass{article}\n")
+    outFile.write("\\usepackage[breakable]{tcolorbox}" + "\n")
+    outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
+    outFile.write("\\begin{document}\n")
+
+if "-p" in sys.argv and "-f" not in sys.argv:
+    outFile.write("-------Copy and Paste above \\begin{document}------------\n")
+    outFile.write("\\usepackage[breakable]{tcolorbox}" + "\n")
+    outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
+    outFile.write("--------------------------------------------------------\n")
+
 
 outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
 
