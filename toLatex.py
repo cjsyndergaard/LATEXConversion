@@ -56,7 +56,7 @@ if len(sys.argv) == 4:
 outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
 
 for line in inFile:
-    writeLine = line.replace("{", "\\{").replace("}", "\\}").replace("\\", "{\\textbackslash}").replace(" ", "\\ ")
+    writeLine = line.replace("\\", "{\\textbackslash}").replace("{", "\\{").replace("}", "\\}").replace(" ", "\\ ")
     writeLine = writeLine.replace("\n", "").replace("^", "\\^").replace("&", "\\&").replace("$", "\\$").replace("_", "\\_")
     writeLine = writeLine.replace("#", "\\#").replace("%", "\\%").replace("\t", "\\ \\ \\ \\ ")
 
