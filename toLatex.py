@@ -88,9 +88,8 @@ for line in inFile:
 
 outFile.write("\\end{tcolorbox}" + "\n")
 
-if len(sys.argv) == 3:
-    if sys.argv[2] == "-f":
-        outFile.write("\\end{document}")
+if "-f" in sys.argv:
+    outFile.write("\\end{document}")
 
 
 
