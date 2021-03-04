@@ -63,6 +63,8 @@ if "-p" in sys.argv and "-f" not in sys.argv:
 
 outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
 
+i = 1
+
 for line in inFile:
     # Replace escape characters
     writeLine = line.replace("\\", "{\\textbackslash}")
@@ -79,11 +81,10 @@ for line in inFile:
     writeLine = writeLine.replace("\t", "\\ \\ \\ \\ ")
 
     # Add the line to the document
-    outFile.write("\\code{-")
+    outFile.write("\\code{|" + '{:>3}'.format(str(i)).replace(" ", "\\ ") + "| ")
     outFile.write(writeLine)
     outFile.write("}\\\\" + "\n")
-
-outFile.write("\\code{-}\\\\" + "\n")
+    i += 1
 
 outFile.write("\\end{tcolorbox}" + "\n")
 
