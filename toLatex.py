@@ -19,8 +19,8 @@ if len(sys.argv) == 1:
     print("Input:")
     print("$ python toLatex.py [nameOfFileToConvert].[extension]")
     print("$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt")
-    print("$ python toLatex.py [nameOfFileToConvert].[extension] [-p or -f [-f or -p]]")
-    print("$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt [-p or -f [-f or -p]]\n")
+    print("$ python toLatex.py [nameOfFileToConvert].[extension] [-c or -f [-f or -c]]")
+    print("$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt [-c or -f [-f or -c]]\n")
 
     print("It will convert any (raw text based) file extension to a .txt (at least, I think so,")
     print("I tried it with .jl, .py, and of course, .txt), which you can just open up and copy")
@@ -60,8 +60,10 @@ if "-p" in sys.argv and "-f" not in sys.argv:
     outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
     outFile.write("--------------------------------------------------------\n")
 
-
-outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
+if "-c" in sys.argv:
+    outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=black, coltext=green]" + "\n")
+else:
+    outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
 
 i = 1
 
