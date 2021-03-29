@@ -62,11 +62,10 @@ if "-p" in sys.argv and "-f" not in sys.argv:
 
 if "-c" in sys.argv:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=black, coltext=green]" + "\n")
-else:
-    outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
 
-if "-n" in sys.argv:
+elif "-n" in sys.argv:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=purple, coltext=yellow]" + "\n")
+
 else:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
 
