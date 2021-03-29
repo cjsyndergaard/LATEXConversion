@@ -1,4 +1,4 @@
-import sys
+import sys, math
 
 # Use on the command line
 # Input:$ python toLatex.py [nameOfFileToConvert].[extension]
@@ -16,24 +16,33 @@ import sys
 # end in .txt
 
 if len(sys.argv) == 1:
-    print("Input:")
-    print("$ python toLatex.py [nameOfFileToConvert].[extension]")
-    print("$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt")
-    print("$ python toLatex.py [nameOfFileToConvert].[extension] [-c or -f [-f or -c]]")
-    print("$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt [-c or -f [-f or -c]]\n")
+    print("Available Input:")
+    print(
+    "$ python toLatex.py [nameOfFileToConvert].[extension]" + "\n" +
+    "$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt" + "\n" +
+    "$ python toLatex.py [nameOfFileToConvert].[extension] [tags: -f -p -c -n]" + "\n" +
+    "$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt [tags: -f -p -c -n]" + "\n" +
+    "\t For more information on tags, run the program with tag --help"
+    )
+    sys.exit(0)
 
-    print("It will convert any (raw text based) file extension to a .txt (at least, I think so,")
-    print("I tried it with .jl, .py, and of course, .txt), which you can just open up and copy")
-    print("and paste into whatever .tex document you're working on. the -p command means you")
-    print("don't have the packages and custom commands in your .tex file, so it includes them")
-    print("at the top of the .tex, before the \\begin{document}. It's pretty janky and not")
-    print("greatly tested, there are probably a ton more .replace()s that I need to do, but it's")
-    print("great for simple pseudocode and everything I've been able to find. The outfile needs")
-    print("to end in .txt.")
-
+if "--help" in sys.argv:
+    print(
+    "-f: Writes a full Latex file with necessary packages to output file" + "\n" +
+    "-p: Writes necessary packages to output file" + "\n" +
+    "-c: Writes code box with 'hacker' color scheme" + "\n" +
+    "-n: Writes code box with 'Nick' color scheme"
+    )
     sys.exit(0)
 
 inFile = open(sys.argv[1], "r")
+num_lines = sum(1 for line in inFile)
+
+spaces = math.floor(math.log(num_lines, 10)) + 2
+if spaces == 2:
+    spaces += 1
+
+inFile.seek(0)
 
 if len(sys.argv) > 2:
     if sys.argv[2].endswith(".txt"):
@@ -87,7 +96,8 @@ for line in inFile:
     writeLine = writeLine.replace("\t", "\\ \\ \\ \\ ")
 
     # Add the line to the document
-    outFile.write("\\code{|" + '{:>3}'.format(str(i)).replace(" ", "\\ ") + "| ")
+    lineNumberSpacing = '{:>' + str(spaces) + '}'
+    outFile.write("\\code{|" + lineNumberSpacing.format(str(i)).replace(" ", "\\ ") + "| ")
     outFile.write(writeLine)
     outFile.write("}\\\\" + "\n")
     i += 1
@@ -96,8 +106,6 @@ outFile.write("\\end{tcolorbox}" + "\n")
 
 if "-f" in sys.argv:
     outFile.write("\\end{document}")
-
-
 
 inFile.close()
 outFile.close()
