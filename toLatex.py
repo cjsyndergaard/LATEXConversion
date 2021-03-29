@@ -64,7 +64,7 @@ if "-c" in sys.argv:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=black, coltext=green]" + "\n")
 
 elif "-n" in sys.argv:
-    outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=violet, coltext=yellow]" + "\n")
+    outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=violet, coltext=white]" + "\n")
 
 else:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
