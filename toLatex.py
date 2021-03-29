@@ -1,19 +1,10 @@
 import sys, math
 
-# Use on the command line
-# Input:$ python toLatex.py [nameOfFileToConvert].[extension]
-#       $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt
-#       $ python toLatex.py [nameOfFileToConvert].[extension] -p
-#       $ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt -p
-#
-# It will convert any (raw text based) file extension to a .txt (at least, I think so,
-# I tried it with .jl, .py, and of course, .txt), which you can just open up and copy
-# and paste into whatever .tex document you're working on. the -p command means you
-# don't have the packages and custom commands in your .tex file, so it includes them
-# at the top of the .tex, before the \begin{document}. It's pretty janky and not
-# greatly tested, there are probably a ton more .replace()s that I need to do, but it's
-# great for simple pseudocode and everything I've been able to find. Outfile needs to
-# end in .txt
+reset = "\u001B[0m"
+red = "\u001B[31m"
+green = "\u001B[32m"
+yellow = "\u001B[33m"
+cyan = "\u001B[36m"
 
 if len(sys.argv) == 1:
     print("Available Input:")
@@ -22,7 +13,7 @@ if len(sys.argv) == 1:
     "$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt" + "\n" +
     "$ python toLatex.py [nameOfFileToConvert].[extension] [tags: -f -p -c -n]" + "\n" +
     "$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt [tags: -f -p -c -n]" + "\n" +
-    "\t For more information on tags, run the program with tag --help"
+    yellow + "For more information on tags, run the program with tag --help" + reset
     )
     sys.exit(0)
 
@@ -44,8 +35,10 @@ if spaces == 2:
 
 inFile.seek(0)
 
+customOut = False
 if len(sys.argv) > 2:
     if sys.argv[2].endswith(".txt"):
+        customOut = True
         outFile = open(sys.argv[2], "w")
     else:
         outFile = open("formattedLatex.txt", "w")
@@ -74,11 +67,14 @@ if "-c" in sys.argv:
 
 elif "-n" in sys.argv:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=violet, coltext=white]" + "\n")
-
 else:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
 
+# Give reassurance to user something is happening
 i = 1
+# loading = math.ceil(num_lines / 10)
+print(yellow + "File Conversion Begun" + reset)
+# print("Conversion: <" + red + ("-" * 10) + reset + ">", end="\r", flush=True)
 
 for line in inFile:
     # Replace escape characters
@@ -100,12 +96,21 @@ for line in inFile:
     outFile.write("\\code{|" + lineNumberSpacing.format(str(i)).replace(" ", "\\ ") + "| ")
     outFile.write(writeLine)
     outFile.write("}\\\\" + "\n")
+
+    # Give reassurance to user something is happening:
+    # print("Conversion: <" + green + "=" * int(i / loading) + red + "-" * (10 - int(i / loading)) + reset + ">", end="\r", flush=True)
     i += 1
 
 outFile.write("\\end{tcolorbox}" + "\n")
+# print("Conversion: <" + green + "=" * 10 + reset + ">", flush=True)
 
 if "-f" in sys.argv:
     outFile.write("\\end{document}")
 
 inFile.close()
 outFile.close()
+
+if customOut:
+    print(cyan + "File Conversion Complete; See " + sys.argv[2] + " in cd for LATEX" + reset)
+else:
+    print(cyan + "File Conversion Complete; See formattedLatex.txt in cd for LATEX" + reset)
