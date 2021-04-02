@@ -7,12 +7,20 @@ yellow = "\u001B[33m"
 cyan = "\u001B[36m"
 
 if len(sys.argv) == 1:
-    print("Available Input:")
+    print(cyan + "Available Input:" + reset + "\n")
     print(
+    "If toLatex.py is a raw python file:" + "\n"
     "$ python toLatex.py [nameOfFileToConvert].[extension]" + "\n" +
     "$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt" + "\n" +
     "$ python toLatex.py [nameOfFileToConvert].[extension] [tags: -f -p -c -n]" + "\n" +
     "$ python toLatex.py [nameOfFileToConvert].[extension] [customOutputFile].txt [tags: -f -p -c -n]" + "\n" +
+    "\n" +
+    "If toLatex.py has alias 'totex':" + "\n" +
+    "$ totex [nameOfFileToConvert].[extension]" + "\n" +
+    "$ totex [nameOfFileToConvert].[extension] [customOutputFile].txt" + "\n" +
+    "$ totex [nameOfFileToConvert].[extension] [tags: -f -p -c -n]" + "\n" +
+    "$ totex [nameOfFileToConvert].[extension] [customOutputFile].txt [tags: -f -p -c -n]" + "\n" +
+    "\n" +
     yellow + "For more information on tags, run the program with tag --help" + reset
     )
     sys.exit(0)
@@ -62,11 +70,19 @@ if "-p" in sys.argv and "-f" not in sys.argv:
     outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
     outFile.write("--------------------------------------------------------\n")
 
+# Themes
+mainCol = ""
+secCol = ""
+
 if "-c" in sys.argv:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=black, coltext=green]" + "\n")
+    mainCol = "\color{green}"
+    secCol = "\color{orange}"
 
 elif "-n" in sys.argv:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=violet, coltext=white]" + "\n")
+    mainCol = "\color{white}"
+    secCol = "\color{yellow}" # Nick Change This
 else:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
 
@@ -90,6 +106,17 @@ for line in inFile:
     writeLine = writeLine.replace("#", "\\#")
     writeLine = writeLine.replace("%", "\\%")
     writeLine = writeLine.replace("\t", "\\ \\ \\ \\ ")
+
+    # Add Color themes
+    writeLine = writeLine.replace("for", str(secCol + "for" + mainCol))
+    writeLine = writeLine.replace("while", secCol + "while" + mainCol)
+    writeLine = writeLine.replace("in", secCol + "in" + mainCol)
+    writeLine = writeLine.replace("try", secCol + "try" + mainCol)
+    writeLine = writeLine.replace("print", secCol + "print" + mainCol)
+    writeLine = writeLine.replace("string", secCol + "string" + mainCol)
+    writeLine = writeLine.replace("boolean", secCol + "boolean" + mainCol)
+    writeLine = writeLine.replace("int", secCol + "int" + mainCol)
+    writeLine = writeLine.replace("return", secCol + "return" + mainCol)
 
     # Add the line to the document
     lineNumberSpacing = '{:>' + str(spaces) + '}'
