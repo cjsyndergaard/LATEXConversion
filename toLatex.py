@@ -110,7 +110,7 @@ for line in inFile:
     # Add Color themes
     writeLine = writeLine.replace("for", str(secCol + "for" + mainCol))
     writeLine = writeLine.replace("while", secCol + "while" + mainCol)
-    writeLine = writeLine.replace("in", secCol + "in" + mainCol)
+    writeLine = writeLine.replace(" in ", secCol + " in " + mainCol)
     writeLine = writeLine.replace("try", secCol + "try" + mainCol)
     writeLine = writeLine.replace("print", secCol + "print" + mainCol)
     writeLine = writeLine.replace("string", secCol + "string" + mainCol)
