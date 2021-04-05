@@ -117,6 +117,10 @@ for line in inFile:
     writeLine = writeLine.replace("boolean", secCol + "boolean" + mainCol)
     writeLine = writeLine.replace("int", secCol + "int" + mainCol)
     writeLine = writeLine.replace("return", secCol + "return" + mainCol)
+    writeLine = writeLine.replace("function", secCol + "function" + mainCol)
+    writeLine = writeLine.replace("end", secCol + "end" + mainCol)
+    writeLine = writeLine.replace("def", secCol + "def" + mainCol)
+    writeLine = writeLine.replace("class", secCol + "class" + mainCol)
 
     # Add the line to the document
     lineNumberSpacing = '{:>' + str(spaces) + '}'
