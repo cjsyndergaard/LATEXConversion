@@ -62,6 +62,7 @@ if "-f" in sys.argv:
     outFile.write("\\setlength{\\evensidemargin}{0.25 in}" + "\n")
     outFile.write("\\setlength{\\textheight}{9. in}" + "\n")
     outFile.write("\\setlength{\\textwidth}{7 in}" + "\n")
+    outFile.write("\definecolor{darkgrey}{rgb}{0.2, 0.2, 0.2}" + "\n")
     outFile.write("\\begin{document}\n" + "\n")
 
 if "-p" in sys.argv and "-f" not in sys.argv:
@@ -73,18 +74,24 @@ if "-p" in sys.argv and "-f" not in sys.argv:
 # Themes
 mainCol = ""
 secCol = ""
+thirdCol = ""
+opCol = ""
 
 if "-c" in sys.argv:
-    outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=black, coltext=green]" + "\n")
+    outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=darkgrey, coltext=green]" + "\n")
     mainCol = "\color{green}"
     secCol = "\color{orange}"
+    thirdCol = "\color{white}"
+    opCol = "\color{cyan}"
 
 elif "-n" in sys.argv:
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=violet, coltext=white]" + "\n")
     mainCol = "\color{white}"
     secCol = "\color{yellow}" # Nick Change This
+    thirdCol = "\color{green}"
+    opCol = "\color{cyan}"
 else:
-    outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable]" + "\n")
+    outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=white]" + "\n")
 
 # Give reassurance to user something is happening
 i = 1
@@ -108,22 +115,42 @@ for line in inFile:
     writeLine = writeLine.replace("\t", "\\ \\ \\ \\ ")
 
     # Add Color themes
-    writeLine = writeLine.replace("for", secCol + "for" + mainCol)
-    writeLine = writeLine.replace("while", secCol + "while" + mainCol)
-    writeLine = writeLine.replace(" in ", secCol + " in " + mainCol)
-    writeLine = writeLine.replace("try", secCol + "try" + mainCol)
-    writeLine = writeLine.replace("print", secCol + "print" + mainCol)
-    writeLine = writeLine.replace("string", secCol + "string" + mainCol)
-    writeLine = writeLine.replace("boolean", secCol + "boolean" + mainCol)
-    writeLine = writeLine.replace("int", secCol + "int" + mainCol)
-    writeLine = writeLine.replace("return", secCol + "return" + mainCol)
-    writeLine = writeLine.replace("function", secCol + "function" + mainCol)
-    writeLine = writeLine.replace("end", secCol + "end" + mainCol)
-    writeLine = writeLine.replace("def", secCol + "def" + mainCol)
-    writeLine = writeLine.replace("class", secCol + "class" + mainCol)
-    writeLine = writeLine.replace("if", secCol + "if" + mainCol)
-    writeLine = writeLine.replace("else", secCol + "else" + mainCol)
-    writeLine = writeLine.replace("null", secCol + "null" + mainCol)
+    if writeLine.startswith("\\#") or writeLine.startswith("//"):
+        # Comments
+        writeLine = writeLine.replace(writeLine, thirdCol + writeLine + mainCol)
+    else:
+        # Key words
+        writeLine = writeLine.replace("for", secCol + "for" + mainCol)
+        writeLine = writeLine.replace("while", secCol + "while" + mainCol)
+        writeLine = writeLine.replace(" in ", secCol + " in " + mainCol)
+        writeLine = writeLine.replace("try", secCol + "try" + mainCol)
+        writeLine = writeLine.replace("print", secCol + "print" + mainCol)
+        writeLine = writeLine.replace("string", secCol + "string" + mainCol)
+        writeLine = writeLine.replace("boolean", secCol + "boolean" + mainCol)
+        writeLine = writeLine.replace("int", secCol + "int" + mainCol)
+        writeLine = writeLine.replace("return", secCol + "return" + mainCol)
+        writeLine = writeLine.replace("function", secCol + "function" + mainCol)
+        writeLine = writeLine.replace("end", secCol + "end" + mainCol)
+        writeLine = writeLine.replace("def", secCol + "def" + mainCol)
+        writeLine = writeLine.replace("class", secCol + "class" + mainCol)
+        writeLine = writeLine.replace("if", secCol + "if" + mainCol)
+        writeLine = writeLine.replace("else", secCol + "else" + mainCol)
+        writeLine = writeLine.replace("null", secCol + "null" + mainCol)
+
+        # Operations
+        writeLine = writeLine.replace("+", opCol + "+" + mainCol)
+        writeLine = writeLine.replace("-", opCol + "-" + mainCol)
+        writeLine = writeLine.replace("*", opCol + "*" + mainCol)
+        writeLine = writeLine.replace("/", opCol + "/" + mainCol)
+        writeLine = writeLine.replace("=", opCol + "=" + mainCol)
+        writeLine = writeLine.replace("<", opCol + "<" + mainCol)
+        writeLine = writeLine.replace(">", opCol + ">" + mainCol)
+        writeLine = writeLine.replace("!", opCol + "!" + mainCol)
+        writeLine = writeLine.replace("^", opCol + "^" + mainCol)
+        writeLine = writeLine.replace(":", opCol + ":" + mainCol)
+        writeLine = writeLine.replace(",", opCol + "," + mainCol)
+        writeLine = writeLine.replace("'", opCol + "'" + mainCol)
+
 
     # Add the line to the document
     lineNumberSpacing = '{:>' + str(spaces) + '}'
