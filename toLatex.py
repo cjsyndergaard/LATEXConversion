@@ -108,7 +108,7 @@ for line in inFile:
     writeLine = writeLine.replace("\t", "\\ \\ \\ \\ ")
 
     # Add Color themes
-    writeLine = writeLine.replace("for", str(secCol + "for" + mainCol))
+    writeLine = writeLine.replace("for", secCol + "for" + mainCol)
     writeLine = writeLine.replace("while", secCol + "while" + mainCol)
     writeLine = writeLine.replace(" in ", secCol + " in " + mainCol)
     writeLine = writeLine.replace("try", secCol + "try" + mainCol)
@@ -121,13 +121,18 @@ for line in inFile:
     writeLine = writeLine.replace("end", secCol + "end" + mainCol)
     writeLine = writeLine.replace("def", secCol + "def" + mainCol)
     writeLine = writeLine.replace("class", secCol + "class" + mainCol)
+    writeLine = writeLine.replace("if", secCol + "if" + mainCol)
+    writeLine = writeLine.replace("else", secCol + "else" + mainCol)
+    writeLine = writeLine.replace("null", secCol + "null" + mainCol)
 
     # Add the line to the document
     lineNumberSpacing = '{:>' + str(spaces) + '}'
     outFile.write("\\code{|" + lineNumberSpacing.format(str(i)).replace(" ", "\\ ") + "| ")
     outFile.write(writeLine)
-    outFile.write("}\\\\" + "\n")
-
+    outFile.write("}")
+    if i != num_lines:
+        outFile.write("\\\\")
+    outFile.write("\n")
     # Give reassurance to user something is happening:
     # print("Conversion: <" + green + "=" * int(i / loading) + red + "-" * (10 - int(i / loading)) + reset + ">", end="\r", flush=True)
     i += 1
@@ -142,6 +147,6 @@ inFile.close()
 outFile.close()
 
 if customOut:
-    print(cyan + "File Conversion Complete; See " + sys.argv[2] + " in cd for LATEX" + reset)
+    print(green + "File Conversion Complete; See " + sys.argv[2] + " in cd for LATEX" + reset)
 else:
-    print(cyan + "File Conversion Complete; See formattedLatex.txt in cd for LATEX" + reset)
+    print(green + "File Conversion Complete; See formattedLatex.txt in cd for LATEX" + reset)
