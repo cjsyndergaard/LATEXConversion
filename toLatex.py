@@ -66,9 +66,10 @@ if "-f" in sys.argv:
     outFile.write("\\begin{document}\n" + "\n")
 
 if "-p" in sys.argv and "-f" not in sys.argv:
-    outFile.write("-------Copy and Paste above \\begin{document}------------\n")
+    outFile.write("-------Copy and Paste above \\begin{document}------------\n\n")
     outFile.write("\\usepackage[breakable]{tcolorbox}" + "\n")
     outFile.write("\\def\code#1{\\texttt{#1}}" + "\n")
+    outFile.write("\definecolor{darkgrey}{rgb}{0.2, 0.2, 0.2}" + "\n\n")
     outFile.write("--------------------------------------------------------\n")
 
 # Themes
