@@ -155,7 +155,7 @@ for line in inFile:
 
     # Add the line to the document
     lineNumberSpacing = '{:>' + str(spaces) + '}'
-    outFile.write("\\code{|" + lineNumberSpacing.format(str(i)).replace(" ", "\\ ") + "| ")
+    outFile.write("\\code{\color{gray}|" + lineNumberSpacing.format(str(i)).replace(" ", "\\ ") + "| " + mainCol)
     outFile.write(writeLine)
     outFile.write("}")
     if i != num_lines:
