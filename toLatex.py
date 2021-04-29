@@ -136,7 +136,8 @@ for line in inFile:
         writeLine = writeLine.replace("class", secCol + "class" + mainCol)
         writeLine = writeLine.replace("if", secCol + "if" + mainCol)
         writeLine = writeLine.replace("else", secCol + "else" + mainCol)
-        writeLine = writeLine.replace("null", secCol + "null" + mainCol)
+        writeLine = writeLine.replace("elif", secCol + "elif" + mainCol)
+	writeLine = writeLine.replace("null", secCol + "null" + mainCol)
 
         # Operations
         writeLine = writeLine.replace("+", opCol + "+" + mainCol)
@@ -175,6 +176,6 @@ inFile.close()
 outFile.close()
 
 if customOut:
-    print(green + "File Conversion Complete; See " + sys.argv[2] + " in cd for LATEX" + reset)
+    print(green + "File Conversion Complete; See " + cyan + sys.argv[2] + green + " in cd for LATEX" + reset)
 else:
-    print(green + "File Conversion Complete; See formattedLatex.txt in cd for LATEX" + reset)
+    print(green + "File Conversion Complete; See" + cyan + "formattedLatex.txt" + green + " in cd for LATEX" + reset)
