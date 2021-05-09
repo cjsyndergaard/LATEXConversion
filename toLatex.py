@@ -137,7 +137,7 @@ for line in inFile:
         writeLine = writeLine.replace("if", secCol + "if" + mainCol)
         writeLine = writeLine.replace("else", secCol + "else" + mainCol)
         writeLine = writeLine.replace("elif", secCol + "elif" + mainCol)
-	writeLine = writeLine.replace("null", secCol + "null" + mainCol)
+        writeLine = writeLine.replace("null", secCol + "null" + mainCol)
 
         # Operations
         writeLine = writeLine.replace("+", opCol + "+" + mainCol)
@@ -148,10 +148,15 @@ for line in inFile:
         writeLine = writeLine.replace("<", opCol + "<" + mainCol)
         writeLine = writeLine.replace(">", opCol + ">" + mainCol)
         writeLine = writeLine.replace("!", opCol + "!" + mainCol)
-        writeLine = writeLine.replace("^", opCol + "^" + mainCol)
+        # writeLine = writeLine.replace("^", opCol + "^" + mainCol)
         writeLine = writeLine.replace(":", opCol + ":" + mainCol)
         writeLine = writeLine.replace(",", opCol + "," + mainCol)
         writeLine = writeLine.replace("'", opCol + "'" + mainCol)
+
+    if "\\#" in writeLine or "//" in writeLine:
+        # Comments
+        writeLine = writeLine.replace("\\#", thirdCol + "\\#")
+        writeLine = writeLine.replace("//", thirdCol + "//")
 
 
     # Add the line to the document
@@ -178,4 +183,4 @@ outFile.close()
 if customOut:
     print(green + "File Conversion Complete; See " + cyan + sys.argv[2] + green + " in cd for LATEX" + reset)
 else:
-    print(green + "File Conversion Complete; See" + cyan + "formattedLatex.txt" + green + " in cd for LATEX" + reset)
+    print(green + "File Conversion Complete; See " + cyan + "formattedLatex.txt" + green + " in cd for LATEX" + reset)
