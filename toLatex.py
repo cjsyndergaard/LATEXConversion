@@ -92,6 +92,7 @@ elif "-n" in sys.argv:
     thirdCol = "\color{green}"
     opCol = "\color{cyan}"
 else:
+	mainCol = "\color{black}"
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=white]" + "\n")
 
 # Give reassurance to user something is happening
