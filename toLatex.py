@@ -92,7 +92,7 @@ elif "-n" in sys.argv:
     thirdCol = "\color{green}"
     opCol = "\color{cyan}"
 else:
-	mainCol = "\color{black}"
+    mainCol = "\color{black}"
     outFile.write("\\begin{tcolorbox}[width=\\linewidth, breakable, colback=white]" + "\n")
 
 # Give reassurance to user something is happening
@@ -108,7 +108,7 @@ for line in inFile:
     writeLine = writeLine.replace("}", "\\}")
     writeLine = writeLine.replace(" ", "\\ ")
     writeLine = writeLine.replace("\n", "")
-    writeLine = writeLine.replace("^", "\\^")
+    writeLine = writeLine.replace("^", "\textasciicircum ")
     writeLine = writeLine.replace("&", "\\&")
     writeLine = writeLine.replace("$", "\\$")
     writeLine = writeLine.replace("_", "\\_")
@@ -149,7 +149,7 @@ for line in inFile:
         writeLine = writeLine.replace("<", opCol + "<" + mainCol)
         writeLine = writeLine.replace(">", opCol + ">" + mainCol)
         writeLine = writeLine.replace("!", opCol + "!" + mainCol)
-        # writeLine = writeLine.replace("^", opCol + "^" + mainCol)
+        writeLine = writeLine.replace("\textasciicircum", opCol + "\textasciicircum" + mainCol)
         writeLine = writeLine.replace(":", opCol + ":" + mainCol)
         writeLine = writeLine.replace(",", opCol + "," + mainCol)
         writeLine = writeLine.replace("'", opCol + "'" + mainCol)
